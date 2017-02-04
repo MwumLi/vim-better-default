@@ -104,14 +104,18 @@ command! W w !sudo tee % > /dev/null
   " inside iTerm2
   if $TERM_PROGRAM =~# 'iTerm'
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    if exists('&t_SR')
+      let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    endif
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
 
   " inside tmux
   if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    if exists('&t_SR')
+      let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    endif
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
   endif
 " }
